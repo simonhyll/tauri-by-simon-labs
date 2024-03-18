@@ -1,21 +1,34 @@
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // (optional) Enable the Nuxt devtools
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   // Enable SSG
   ssr: false,
+  build: {
+    transpile: ["vuetify"],
+  },
+  modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook("vite:extendConfig", (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }));
+      });
+    },
+  ],
   vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
     // Better support for Tauri CLI output
     clearScreen: false,
-    // Enable environment variables
-    // Additional environment variables can be found at
-    // https://tauri.app/2/reference/environment-variables/
-    envPrefix: ["VITE_", "TAURI_"],
     server: {
       // Tauri requires a consistent port
       strictPort: true,
       // Enables the development server to be discoverable by other devices for mobile development
-      host: "0.0.0.0",
       hmr: {
         // Use websocket for mobile hot reloading
         protocol: "ws",
