@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@tauri-apps/api": "2.0.0-beta.5",
+    "@tauri-apps/plugin-log": "github:tauri-apps/tauri-plugin-log#v2",
     "@types/markdown-it": "^13.0.7",
     "markdown-it": "^14.0.0",
     "nuxt": "^3.11.0",

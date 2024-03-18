@@ -11,6 +11,9 @@ dependencies:
   '@tauri-apps/api':
     specifier: 2.0.0-beta.5
     version: 2.0.0-beta.5
+  '@tauri-apps/plugin-log':
+    specifier: github:tauri-apps/tauri-plugin-log#v2
+    version: github.com/tauri-apps/tauri-plugin-log/18d63249e50d54ddb32bce850eda16e1613f121c
   '@types/markdown-it':
     specifier: ^13.0.7
     version: 13.0.7
@@ -1645,6 +1648,11 @@ packages:
   /@sindresorhus/merge-streams@2.3.0:
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
+    dev: false
+
+  /@tauri-apps/api@2.0.0-beta.4:
+    resolution: {integrity: sha512-Nxtj28NYUo5iwYkpYslxmOPkdI2WkELU2e3UH9nbJm9Ydki2CQwJVGQxx4EANtdZcMNsEsUzRqaDTvEUYH1l6w==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
   /@tauri-apps/api@2.0.0-beta.5:
@@ -6402,4 +6410,12 @@ packages:
       archiver-utils: 5.0.2
       compress-commons: 6.0.2
       readable-stream: 4.5.2
+    dev: false
+
+  github.com/tauri-apps/tauri-plugin-log/18d63249e50d54ddb32bce850eda16e1613f121c:
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-log/tar.gz/18d63249e50d54ddb32bce850eda16e1613f121c}
+    name: '@tauri-apps/plugin-log'
+    version: 2.0.0-beta.2
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.4
     dev: false
