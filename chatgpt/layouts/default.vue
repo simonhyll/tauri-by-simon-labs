@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { invoke } from "@tauri-apps/api/core";
 import { ref } from "vue";
 const showTokenSelector = ref(false);
 const token = ref("");
@@ -73,6 +74,11 @@ const items = [
 //== saveToken ==//
 const saveToken = async function () {
   // TODO: Send the token to the backend
+  try {
+    await invoke("connect", { token: token.value });
+  } catch (error) {
+    console.error(error);
+  }
   // Cleanup after saving
   token.value = "";
   showTokenSelector.value = false;

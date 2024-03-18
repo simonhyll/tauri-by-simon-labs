@@ -66,8 +66,10 @@
 </template>
 
 <script setup lang="ts">
+import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
 import markdownit from "markdown-it";
-import { reactive, ref } from "vue";
+import { reactive, ref, onBeforeUnmount } from "vue";
 const message = ref("");
 const md = markdownit({ breaks: true });
 const messages: any[] = reactive([]);
@@ -82,11 +84,25 @@ const sendMessage = async function () {
     text: message.value,
     time: new Date().toLocaleDateString(),
   });
-  message.value = "";
-  // TODO: Send the message to the backend
+  try {
+    await invoke("prompt", { message: message.value });
+    message.value = "";
+  } catch (error) {
+    console.error(error);
+  }
 };
 //== event: message ==//
-// TODO: Set up an event listener
+const unlisten = listen("message", (event: any) => {
+  console.log("received event:", event);
+  messages.push({
+    from: "bot",
+    text: event.payload,
+    time: new Date().toLocaleDateString(),
+  });
+});
+onBeforeUnmount(() => {
+  unlisten();
+});
 </script>
 
 <style>
